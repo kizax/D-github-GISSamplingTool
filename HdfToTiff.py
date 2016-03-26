@@ -1,6 +1,8 @@
 
 from osgeo import gdal, ogr, osr
-import struct, numpy
+# import struct, numpy
+import os
+
 
 class looker(object):
     """let you look up pixel value"""
@@ -49,29 +51,29 @@ class looker(object):
         return self.arr[ylin,xpix]
 
 
+os.system("\"C:/Program Files (x86)/GDAL/gdalwarp.exe\" -overwrite -s_srs EPSG:53008 -t_srs EPSG:3826 -dstnodata -9999 -of GTiff C:/Users/hunter/Desktop/GIS/MOD04_L2.A2014350_mod04.tif ./test2.tif");
 
-
-src_filename = 'C:/Users/hunter/Desktop/GIS/test.tif'
-shp_filename = 'C:/Users/hunter/Desktop/GIS/site/site.shp'
-
-src_ds=gdal.Open(src_filename)
-gt=src_ds.GetGeoTransform()
-rb=src_ds.GetRasterBand(1)
-
-ds=ogr.Open(shp_filename)
-
-layer=ds.GetLayer()
-print(layer.GetFeatureCount())
-
-for feature in layer:
-    mx = feature.GetFieldAsDouble(6)
-    my = feature.GetFieldAsDouble(7)
-    print(mx)
-    print(my)
-
-    l = looker(src_filename)
-    lon, lat = mx, my
-    print l.lookup(lon, lat)
+# src_filename = 'C:/Users/hunter/Desktop/GIS/test.tif'
+# shp_filename = 'C:/Users/hunter/Desktop/GIS/site/site.shp'
+#
+# src_ds=gdal.Open(src_filename)
+# gt=src_ds.GetGeoTransform()
+# rb=src_ds.GetRasterBand(1)
+#
+# ds=ogr.Open(shp_filename)
+#
+# layer=ds.GetLayer()
+# print(layer.GetFeatureCount())
+#
+# for feature in layer:
+#     mx = feature.GetFieldAsDouble(6)
+#     my = feature.GetFieldAsDouble(7)
+#     print(mx)
+#     print(my)
+#
+#     l = looker(src_filename)
+#     lon, lat = mx, my
+#     print l.lookup(lon, lat)
 
 
 
