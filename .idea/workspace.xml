@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8afe59cf-9c30-4f8d-aa0b-215ebca8fc32" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/2003.tif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp/Optical_Depth_Land_And_Ocean.tif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp/test2.tif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/123batch_swath" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test2.tif" afterPath="$PROJECT_DIR$/test2.tif" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HdfToTiff.py" afterPath="$PROJECT_DIR$/HdfToTiff.py" />
@@ -281,7 +285,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="1" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18020834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
