@@ -51,8 +51,10 @@ class looker(object):
         return self.arr[ylin,xpix]
 
 
+os.system("swtif -p 123batch_swath")
 
-srcTif = "C:/Users/hunter/Desktop/GIS/MOD04_L2.A2014350_mod04.tif"
+
+srcTif = "C:/Users/hunter/Desktop/GIS/MOD04_L2.A2011028.0155.051.2011033055902_mod04.tif"
 convertedTif = './test2.tif'
 siteShp = 'C:/Users/hunter/Desktop/GIS/site/site.shp'
 
