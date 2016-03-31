@@ -69,9 +69,8 @@ def getAllSiteAodResult(convertedTif, siteShp):
         geoTransform = rasterFile.GetGeoTransform()
         rasterBand = rasterFile.GetRasterBand(1)
     except AttributeError:
-        aodListStr = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
+        aodListStr = "-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999,-999"
         return aodListStr
-
 
     vectorFile = ogr.Open(siteShp)
 
@@ -111,7 +110,7 @@ def getAllSiteAodResult(convertedTif, siteShp):
 
 # 參數設定區
 hdfFolderLocation = "C:\Users\hunter\Desktop\hdf"
-siteShp = 'C:/Users/hunter/Desktop/GIS/site/site.shp'
+siteShp = 'C:\Users\hunter\Desktop\GIS\site\site.shp'
 logFileName = "log.txt"
 
 subDataSet = "Optical_Depth_Land_And_Ocean"
@@ -132,10 +131,9 @@ timeFieldStr = "year,month,day,time,"
 satellite = "terra"
 siteListStr = "Erlin,Sanchong,Sanyi,Tucheng,Shilin,Datong,Dali,Dayuan,Daliao,Xiaogang,Zhongshan,Zhongli,Renwu,Douliu,Dongshan,Guting,Zuoying,Pingzhen,Yonghe,Annan,Puzi,Xizhi,Zhushan,Zhudong,Xitun,Shalu,Yilan,Zhongming,Songshan,Banqiao,Linkou,Linyuan,Hualien,Kinmen,Qianjin,Qianzhen,Nantou,Pingtung,Hengchun,Meinong,Miaoli,Puli,Taoyuan,Magong,Matsu,Keelung,Lunbei,Tamsui,Mailiao,Shanhua,Fuxing,Hukou,Cailiao,Yangming,Hsinchu,Xindian,Xinzhuang,Xingang,Xinying,Nanzi,Wanli,Wanhua,Chiayi,Changhua,Taixi,Taitung,Tainan,Fengshan,Chaozhou,Xianxi,Qiaotou,Toufen,Longtan,Fengyuan,Guanshan,Guanyin"
 csvFile = open(csvFileName, "a")
-fieldsStr = timeFieldStr + "satellite," + siteListStr+"\n"
+fieldsStr = timeFieldStr + "satellite," + siteListStr + "\n"
 csvFile.write(fieldsStr)
 csvFile.close()
-
 
 # 抓出資料夾內的所有hdf 檔案名稱
 hdfFiles = [f for f in listdir(hdfFolderLocation) if isfile(join(hdfFolderLocation, f))]
@@ -163,7 +161,7 @@ for f in hdfFiles:
 
     # 轉換tif成為EPSG:3826投影格式
     os.system(
-        "\"C:/Program Files (x86)/GDAL/gdalwarp.exe\" -overwrite -s_srs EPSG:53008 -t_srs EPSG:3826 -dstnodata -9999 -of GTiff " + srcTif + " " + convertedTif + "")
+        "gdalwarp -overwrite -s_srs EPSG:53008 -t_srs EPSG:3826 -dstnodata -9999 -of GTiff " + srcTif + " " + convertedTif + "")
 
     # 取得各測站資料
     aodListStr = getAllSiteAodResult(convertedTif, siteShp)
