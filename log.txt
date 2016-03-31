@@ -1,1 +1,1 @@
-2016-03-31 16:35:04 Start processing all hdf files
+2016-03-31 18:54:32  Start processing all hdf files

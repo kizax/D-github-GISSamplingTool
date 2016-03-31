@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from osgeo import gdal, ogr, osr
-# import struct, numpy
+import struct, numpy
 import os
 import re
 import codecs
-from datetime import datetime
-
+import datetime
+from os import listdir
+from os.path import isfile, join
 
 class looker(object):
     """let you look up pixel value"""
@@ -55,13 +56,10 @@ class looker(object):
         return self.arr[ylin, xpix]
 
 
-# log
-logFileName = "log.txt"
-logFile = open(logFileName, "w")
-logStr = datetime.now().strftime('%Y-%m-%d %H:%M:%S ') + "Start processing all hdf files"
-logFile.write(logStr)
+
 
 # 參數設定區
+hdfFolderLocation = "C:\Users\hunter\Desktop\hdf"
 hdfFileLocation = "C:\Users\hunter\Desktop\GIS\MOD04_L2.A2011028.0155.051.2011033055902.hdf"
 subDataSet = "Optical_Depth_Land_And_Ocean"
 hdrFileName = "temp_hdr"
@@ -69,6 +67,19 @@ hdrFileName = "temp_hdr"
 srcTif = "C:\Users\hunter\Desktop\GIS\MOD04_L2.A2011028.0155.051.2011033055902_mod04.tif"
 convertedTif = './test2.tif'
 siteShp = 'C:/Users/hunter/Desktop/GIS/site/site.shp'
+
+logFileName = "log.txt"
+csvFileName = "result.csv"
+
+# log
+logFile = open(logFileName, "w")
+logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Start processing all hdf files"
+logFile.write(logStr)
+
+# 抓出資料夾內的所有hdf 檔案名稱
+hdfFiles = [f for f in listdir(hdfFolderLocation) if isfile(join(hdfFolderLocation, f))]
+for f in hdfFiles:
+    print(f)
 
 # 生成hdr檔案
 commandStr = "hegtool -m " + hdfFileLocation + " " + hdrFileName
@@ -160,6 +171,8 @@ aodListStr = ','.join(str(aod) for aod in aodList)
 
 print(siteEngNameListStr)
 print(aodListStr)
+csvFile = open(csvFileName, "w")
+csvFile.write(siteEngNameListStr)
 
 # 將測站資料寫入csv
 oldFilename = 'MOD04_L2.A2011028.0155.051.2011033055902.hdf'
