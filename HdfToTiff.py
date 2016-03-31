@@ -5,7 +5,7 @@ from osgeo import gdal, ogr, osr
 import os
 import re
 import codecs
-import datetime
+from datetime import datetime
 
 
 class looker(object):
@@ -56,25 +56,27 @@ class looker(object):
 
 
 # log
+logFileName = "log.txt"
+logFile = open(logFileName, "w")
+logStr = datetime.now().strftime('%Y-%m-%d %H:%M:%S ') + "Start processing all hdf files"
+logFile.write(logStr)
 
 # 參數設定區
-
 hdfFileLocation = "C:\Users\hunter\Desktop\GIS\MOD04_L2.A2011028.0155.051.2011033055902.hdf"
 subDataSet = "Optical_Depth_Land_And_Ocean"
-hdrFile = "temp_hdr"
+hdrFileName = "temp_hdr"
 
 srcTif = "C:\Users\hunter\Desktop\GIS\MOD04_L2.A2011028.0155.051.2011033055902_mod04.tif"
 convertedTif = './test2.tif'
 siteShp = 'C:/Users/hunter/Desktop/GIS/site/site.shp'
 
 # 生成hdr檔案
-commandStr = "hegtool -m " + hdfFileLocation + " " + hdrFile
+commandStr = "hegtool -m " + hdfFileLocation + " " + hdrFileName
 os.system(commandStr)
 
 # 讀取出 SWATH_X_PIXEL_RES_METERS, SWATH_Y_PIXEL_RES_METERS, SPATIAL_SUBSET_UL_CORNER, SPATIAL_SUBSET_LR_CORNER
-
-hdrFile = open(hdrFile, 'r')
-for line in hdrFile:
+hdrFileName = open(hdrFileName, 'r')
+for line in hdrFileName:
     if "SWATH_X_PIXEL_RES_METERS" in line:
         matcher = re.search('[\d.]+', line)
         tempStr = matcher.group(0)
@@ -119,6 +121,7 @@ parameterFile.close()
 # 執行 swtif 使用HEG將hdf轉換成tif
 os.system("swtif -p " + parameterFileLocation)
 # os.system("swtif -p 123batch_swath")
+
 
 
 # 轉換tif成為EPSG:3826投影格式
@@ -168,3 +171,6 @@ date = datetime.datetime(year, 1, 1, hour, minute) + datetime.timedelta(
     dayOfYear - 1)  # This assumes that the year is 2007
 newFilename = date.strftime('%Y-%m-%d %H:%M')
 print(newFilename)
+
+# 關閉csv及log檔案
+logFile.close()
