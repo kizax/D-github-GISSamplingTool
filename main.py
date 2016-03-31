@@ -135,7 +135,6 @@ csvFile = open(csvFileName, "a")
 fieldsStr = timeFieldStr + "satellite," + siteListStr+"\n"
 csvFile.write(fieldsStr)
 csvFile.close()
-csvFile.close()
 
 
 # 抓出資料夾內的所有hdf 檔案名稱
