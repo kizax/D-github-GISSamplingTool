@@ -1,0 +1,50 @@
+
+STATUS_VALUE=0
+
+FILE_NAME=C:\Users\hunter\Desktop\GIS\MOD04_L2.A2011028.0155.051.2011033055902.hdf
+
+NUM_OBJECTS=1
+
+NUM_GRIDS=0
+
+NUM_SWATHS=1
+
+ASTER_FLAG=NO
+
+SWATH_NAMES=mod04,
+
+SWATH_NFIELDS=77 
+
+SWATH_FIELD_NAMES=MODIS_Band_Land,MODIS_Band_Ocean,Solution_1_Land,Solution_2_Land,Solution_3_Land,Solution_Ocean,Solution_Index,Num_DeepBlue_Wavelengths,Scan_Start_Time,Solar_Zenith,Solar_Azimuth,Sensor_Zenith,Sensor_Azimuth,Cloud_Mask_QA,Scattering_Angle,Optical_Depth_Land_And_Ocean,Image_Optical_Depth_Land_And_Ocean,Optical_Depth_Ratio_Small_Land_And_Ocean,Mean_Reflectance_Land_All,Standard_Deviation_Reflectance_Land_All,Path_Radiance_Land,Error_Path_Radiance_Land,Critical_Reflectance_Land,Error_Critical_Reflectance_Land,QualityWeight_Path_Radiance_Land,QualityWeight_Critical_Reflectance_Land,Aerosol_Type_Land,Fitting_Error_Land,Surface_Reflectance_Land,Corrected_Optical_Depth_Land,Corrected_Optical_Depth_Land_wav2p1,Optical_Depth_Small_Land,Optical_Depth_Ratio_Small_Land,Number_Pixels_Used_Land,Mean_Reflectance_Land,STD_Reflectance_Land,Mass_Concentration_Land,Angstrom_Exponent_Land,Cloud_Fraction_Land,Quality_Assurance_Land,Quality_Assurance_Crit_Ref_Land,Aerosol_Cldmask_Byproducts_Land,Solution_Index_Ocean_Small,Solution_Index_Ocean_Large,Effective_Optical_Depth_Best_Ocean,Effective_Optical_Depth_Average_Ocean,Optical_Depth_Small_Best_Ocean,Optical_Depth_Small_Average_Ocean,Optical_Depth_Large_Best_Ocean,Optical_Depth_Large_Average_Ocean,Mass_Concentration_Ocean,Effective_Radius_Ocean,Cloud_Condensation_Nuclei_Ocean,Asymmetry_Factor_Best_Ocean,Asymmetry_Factor_Average_Ocean,Backscattering_Ratio_Best_Ocean,Backscattering_Ratio_Average_Ocean,Angstrom_Exponent_1_Ocean,Angstrom_Exponent_2_Ocean,Least_Squares_Error_Ocean,Optical_Depth_Ratio_Small_Ocean_0.55micron,Optical_Depth_by_models_ocean,Cloud_Fraction_Ocean,Number_Pixels_Used_Ocean,Mean_Reflectance_Ocean,STD_Reflectance_Ocean,Quality_Assurance_Ocean,Aerosol_Cldmask_Byproducts_Ocean,Deep_Blue_Aerosol_Optical_Depth_550_Land,Deep_Blue_Aerosol_Optical_Depth_Land,Deep_Blue_Angstrom_Exponent_Land,Deep_Blue_Single_Scattering_Albedo_Land,Deep_Blue_Surface_Reflectance_Land,Deep_Blue_Mean_Reflectance_Land,Deep_Blue_Number_Pixels_Used_Land,Deep_Blue_Aerosol_Optical_Depth_550_Land_STD,Deep_Blue_Aerosol_Optical_Depth_Land_STD,
+
+SWATH_NUM_DIMS=1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 2 2 3 3 2 3 2 3 3 3 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 2 3 3 3 3 2 3 2 3 3 3 3 2 3 
+
+SWATH_NUM_BANDS=1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 2 2 2 2 2 2 1 1 3 3 1 4 1 2 7 7 1 1 1 203 203 7 2 2 7 7 7 7 7 7 2 2 2 7 7 7 7 2 2 2 2 9 1 1 7 7 203 7 1 3 1 3 3 3 3 1 3 
+
+SWATH_BAND_NAME=-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,Solution_3_Land,Solution_3_Land,Solution_1_Land,Solution_1_Land,Solution_1_Land,Solution_1_Land,Solution_1_Land,Solution_1_Land,-99,-99,Solution_2_Land,Solution_3_Land,-99,Solution_4_Land,-99,Solution_1_Land,MODIS_Band_Land,MODIS_Band_Land,-99,-99,-99,Cell_Along_Swath,Cell_Along_Swath,Num_By_Products,Solution_Ocean,Solution_Ocean,MODIS_Band_Ocean,MODIS_Band_Ocean,MODIS_Band_Ocean,MODIS_Band_Ocean,MODIS_Band_Ocean,MODIS_Band_Ocean,Solution_Ocean,Solution_Ocean,Solution_Ocean,MODIS_Band_Ocean,MODIS_Band_Ocean,MODIS_Band_Ocean,MODIS_Band_Ocean,Solution_Ocean,Solution_Ocean,Solution_Ocean,Solution_Ocean,Solution_Index,-99,-99,MODIS_Band_Ocean,MODIS_Band_Ocean,Cell_Along_Swath,Num_By_Products,-99,Num_DeepBlue_Wavelengths,-99,Num_DeepBlue_Wavelengths,Num_DeepBlue_Wavelengths,Num_DeepBlue_Wavelengths,Num_DeepBlue_Wavelengths,-99,Num_DeepBlue_Wavelengths,
+
+SWATH_DIM_X_SIZE=1 1 1 1 1 1 1 1 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 5 5 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 135 5 135 135 135 135 135 135 135 135 135 135 
+
+SWATH_DIM_Y_SIZE=7 7 2 3 3 2 9 3 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 135 135 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 203 135 203 203 203 203 203 203 203 203 203 203 
+
+SWATH_DATA_TYPES=24 24 24 24 24 24 24 24 6 22 22 22 22 20 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 5 22 22 20 20 22 22 22 22 22 22 22 22 22 5 22 5 22 22 22 22 22 22 22 22 22 22 22 22 22 20 22 22 22 22 22 22 22 22 22 22 
+
+SWATH_LAT_MIN=3.074087 
+
+SWATH_LAT_MAX=23.852531 
+
+SWATH_LON_MIN=117.855873 
+
+SWATH_LON_MAX=142.701279 
+
+SWATH_X_PIXEL_RES_METERS=9986.198849 
+
+SWATH_Y_PIXEL_RES_METERS=10097.074532 
+
+SWATH_X_PIXEL_RES_DEGREES=0.092282 
+
+SWATH_Y_PIXEL_RES_DEGREES=0.091265 
+
+INPUT_TYPE=HDFEOS
+
+INPUT_SHORTNAME=MOD04_L2
