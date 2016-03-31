@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
 
 from osgeo import gdal, ogr, osr
 # import struct, numpy
 import os
+import re
+import codecs
 
 
 class looker(object):
@@ -16,16 +19,16 @@ class looker(object):
 
         # get the WGS84 spatial reference
         srPoint = osr.SpatialReference()
-        srPoint.ImportFromEPSG(4326) # WGS84
+        srPoint.ImportFromEPSG(4326)  # WGS84
 
         # coordinate transformation
         self.ct = osr.CoordinateTransformation(srPoint, srRaster)
 
         # geotranformation and its inverse
         gt = self.ds.GetGeoTransform()
-        dev = (gt[1]*gt[5] - gt[2]*gt[4])
-        gtinv = ( gt[0] , gt[5]/dev, -gt[2]/dev,
-                gt[3], -gt[4]/dev, gt[1]/dev)
+        dev = (gt[1] * gt[5] - gt[2] * gt[4])
+        gtinv = (gt[0], gt[5] / dev, -gt[2] / dev,
+                 gt[3], -gt[4] / dev, gt[1] / dev)
         self.gt = gt
         self.gtinv = gtinv
 
@@ -37,36 +40,98 @@ class looker(object):
         """look up value at lon, lat"""
 
         # get coordinate of the raster
-        xgeo,ygeo,zgeo = self.ct.TransformPoint(lon, lat, 0)
+        xgeo, ygeo, zgeo = self.ct.TransformPoint(lon, lat, 0)
 
         # convert it to pixel/line on band
         u = xgeo - self.gtinv[0]
         v = ygeo - self.gtinv[3]
         # FIXME this int() is probably bad idea, there should be
         # half cell size thing needed
-        xpix =  int(self.gtinv[1] * u + self.gtinv[2] * v)
+        xpix = int(self.gtinv[1] * u + self.gtinv[2] * v)
         ylin = int(self.gtinv[4] * u + self.gtinv[5] * v)
 
         # look the value up
-        return self.arr[ylin,xpix]
+        return self.arr[ylin, xpix]
 
 
-os.system("swtif -p 123batch_swath")
+# log
 
+hdfFileLocation = "C:\Users\hunter\Desktop\GIS\MOD04_L2.A2011028.0155.051.2011033055902.hdf"
+subDataSet = "Optical_Depth_Land_And_Ocean"
+hdrFile = "temp_hdr"
 
-srcTif = "C:/Users/hunter/Desktop/GIS/MOD04_L2.A2011028.0155.051.2011033055902_mod04.tif"
+srcTif = "C:\Users\hunter\Desktop\GIS\MOD04_L2.A2011028.0155.051.2011033055902_mod04.tif"
 convertedTif = './test2.tif'
 siteShp = 'C:/Users/hunter/Desktop/GIS/site/site.shp'
 
-os.system("\"C:/Program Files (x86)/GDAL/gdalwarp.exe\" -overwrite -s_srs EPSG:53008 -t_srs EPSG:3826 -dstnodata -9999 -of GTiff " + srcTif +" "+ convertedTif+"")
+# 生成hdr檔案
+commandStr = "hegtool -m " + hdfFileLocation + " " + hdrFile
+os.system(commandStr)
 
-src_ds=gdal.Open(convertedTif)
-gt=src_ds.GetGeoTransform()
-rb=src_ds.GetRasterBand(1)
+# 讀取出 SWATH_X_PIXEL_RES_METERS, SWATH_Y_PIXEL_RES_METERS, SPATIAL_SUBSET_UL_CORNER, SPATIAL_SUBSET_LR_CORNER
 
-ds=ogr.Open(siteShp)
+hdrFile = open(hdrFile, 'r')
+for line in hdrFile:
+    if "SWATH_X_PIXEL_RES_METERS" in line:
+        matcher = re.search('[\d.]+', line)
+        tempStr = matcher.group(0)
+        SWATH_X_PIXEL_RES_METERS = round(float(tempStr))
+    if "SWATH_Y_PIXEL_RES_METERS" in line:
+        matcher = re.search('[\d.]+', line)
+        tempStr = matcher.group(0)
+        SWATH_Y_PIXEL_RES_METERS = round(float(tempStr))
+    if "SWATH_LAT_MIN" in line:
+        matcher = re.search('[\d.]+', line)
+        SWATH_LAT_MIN = matcher.group(0)
+    if "SWATH_LAT_MAX" in line:
+        matcher = re.search('[\d.]+', line)
+        SWATH_LAT_MAX = matcher.group(0)
+    if "SWATH_LON_MIN" in line:
+        matcher = re.search('[\d.]+', line)
+        SWATH_LON_MIN = matcher.group(0)
+    if "SWATH_LON_MAX" in line:
+        matcher = re.search('[\d.]+', line)
+        SWATH_LON_MAX = matcher.group(0)
 
-layer=ds.GetLayer()
+# 準備swath參數檔
+parameterFileLocation = "temp_swath"
+
+
+outputPixelSizeXStr = "OUTPUT_PIXEL_SIZE_X = " + str(SWATH_X_PIXEL_RES_METERS) + "\n"
+outputPixelSizeYStr = "OUTPUT_PIXEL_SIZE_Y = " + str(SWATH_Y_PIXEL_RES_METERS) + "\n"
+spatialSubsetUlCornerStr = "SPATIAL_SUBSET_UL_CORNER = ( " + SWATH_LAT_MAX + " " + SWATH_LON_MIN + " )" + "\n"
+spatialSubsetLrCornerStr = "SPATIAL_SUBSET_LR_CORNER = ( " + SWATH_LAT_MIN + " " + SWATH_LON_MAX + " )" + "\n"
+
+
+sectionStr1 = "\nNUM_RUNS = 1\n\nBEGIN\nINPUT_FILENAME = " + hdfFileLocation +"\n"
+sectionStr2 = "OBJECT_NAME = mod04\nFIELD_NAME = " + subDataSet + "|\nBAND_NUMBER = 1\n" + outputPixelSizeXStr + outputPixelSizeYStr + spatialSubsetUlCornerStr + spatialSubsetLrCornerStr
+sectionStr3 = "RESAMPLING_TYPE = NN\nOUTPUT_PROJECTION_TYPE = SIN\nELLIPSOID_CODE = WGS84\n" + \
+              "OUTPUT_PROJECTION_PARAMETERS = ( 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0  )\nOUTPUT_FILENAME = "+ srcTif + "\n"
+sectionStr4 = "OUTPUT_TYPE = GEO\nEND\n\n"
+
+
+parameterStr = sectionStr1 + sectionStr2 + sectionStr3 + sectionStr4
+
+parameterFile = codecs.open(parameterFileLocation, "w", "utf-8")
+parameterFile.write(parameterStr)
+parameterFile.close()
+
+# 執行 swtif 使用HEG將hdf轉換成tif
+os.system("swtif -p " + parameterFileLocation)
+# os.system("swtif -p 123batch_swath")
+
+# 轉換tif成為EPSG:3826投影格式
+os.system(
+    "\"C:/Program Files (x86)/GDAL/gdalwarp.exe\" -overwrite -s_srs EPSG:53008 -t_srs EPSG:3826 -dstnodata -9999 -of GTiff " + srcTif + " " + convertedTif + "")
+
+# 取得各測站資料
+src_ds = gdal.Open(convertedTif)
+gt = src_ds.GetGeoTransform()
+rb = src_ds.GetRasterBand(1)
+
+ds = ogr.Open(siteShp)
+
+layer = ds.GetLayer()
 print(layer.GetFeatureCount())
 
 for feature in layer:
@@ -79,6 +144,4 @@ for feature in layer:
     lon, lat = mx, my
     print l.lookup(lon, lat)
 
-
-
-
+# 將測站資料寫入csv
