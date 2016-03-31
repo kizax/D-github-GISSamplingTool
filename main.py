@@ -64,9 +64,14 @@ def generateParameterFile(hdrFileName, hdfFileLocation, parameterFileLocation):
 
 
 def getAllSiteAodResult(convertedTif, siteShp):
-    rasterFile = gdal.Open(convertedTif)
-    geoTransform = rasterFile.GetGeoTransform()
-    rasterBand = rasterFile.GetRasterBand(1)
+    try:
+        rasterFile = gdal.Open(convertedTif)
+        geoTransform = rasterFile.GetGeoTransform()
+        rasterBand = rasterFile.GetRasterBand(1)
+    except AttributeError:
+        aodListStr = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
+        return aodListStr
+
 
     vectorFile = ogr.Open(siteShp)
 
@@ -123,9 +128,15 @@ logFile.write(logStr)
 
 # 準備csv
 csvFileName = "result" + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + ".csv"
-timeFieldStr = "year,month,day,Time"
+timeFieldStr = "year,month,day,time,"
 satellite = "terra"
 siteListStr = "Erlin,Sanchong,Sanyi,Tucheng,Shilin,Datong,Dali,Dayuan,Daliao,Xiaogang,Zhongshan,Zhongli,Renwu,Douliu,Dongshan,Guting,Zuoying,Pingzhen,Yonghe,Annan,Puzi,Xizhi,Zhushan,Zhudong,Xitun,Shalu,Yilan,Zhongming,Songshan,Banqiao,Linkou,Linyuan,Hualien,Kinmen,Qianjin,Qianzhen,Nantou,Pingtung,Hengchun,Meinong,Miaoli,Puli,Taoyuan,Magong,Matsu,Keelung,Lunbei,Tamsui,Mailiao,Shanhua,Fuxing,Hukou,Cailiao,Yangming,Hsinchu,Xindian,Xinzhuang,Xingang,Xinying,Nanzi,Wanli,Wanhua,Chiayi,Changhua,Taixi,Taitung,Tainan,Fengshan,Chaozhou,Xianxi,Qiaotou,Toufen,Longtan,Fengyuan,Guanshan,Guanyin"
+csvFile = open(csvFileName, "a")
+fieldsStr = timeFieldStr + "satellite," + siteListStr+"\n"
+csvFile.write(fieldsStr)
+csvFile.close()
+csvFile.close()
+
 
 # 抓出資料夾內的所有hdf 檔案名稱
 hdfFiles = [f for f in listdir(hdfFolderLocation) if isfile(join(hdfFolderLocation, f))]
@@ -167,7 +178,10 @@ for f in hdfFiles:
     os.remove(hdrFileName)
     os.remove(parameterFileLocation)
     os.remove(srcTif)
-    os.remove(convertedTif)
+    try:
+        os.remove(convertedTif)
+    except WindowsError:
+        None
 
 # 關閉csv及log檔案
 csvFile.close()
