@@ -1,0 +1,6 @@
+
+Listing Command Line Options:
+ hegtool -m C:\Users\hunter\Desktop\hdf\MOD04_L2.A2011001.0210.051.2011001135314.hdf temp_hdr 
+
+Error: unable to open C:\Users\hunter\Desktop\hdf\MOD04_L2.A2011001.0210.051.2011001135314.hdf. File is not HDF5, HDF-EOS2, or HDF-EOS5 file
+

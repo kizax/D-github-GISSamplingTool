@@ -16,29 +16,29 @@ def generateHdr(hdfFileLocation, hdrFileName):
     return None
 
 
-def generateParameterFile(hdrFileName, parameterFileLocation):
+def generateParameterFile(hdrFileName, hdfFileLocation, parameterFileLocation):
     # 讀取出 SWATH_X_PIXEL_RES_METERS, SWATH_Y_PIXEL_RES_METERS, SPATIAL_SUBSET_UL_CORNER, SPATIAL_SUBSET_LR_CORNER
     hdrFileName = open(hdrFileName, 'r')
     for line in hdrFileName:
         if "SWATH_X_PIXEL_RES_METERS" in line:
-            matcher = re.search('[\d.]+', line)
+            matcher = re.search('[-\d.]+', line)
             tempStr = matcher.group(0)
             SWATH_X_PIXEL_RES_METERS = round(float(tempStr))
         if "SWATH_Y_PIXEL_RES_METERS" in line:
-            matcher = re.search('[\d.]+', line)
+            matcher = re.search('[-\d.]+', line)
             tempStr = matcher.group(0)
             SWATH_Y_PIXEL_RES_METERS = round(float(tempStr))
         if "SWATH_LAT_MIN" in line:
-            matcher = re.search('[\d.]+', line)
+            matcher = re.search('[-\d.]+', line)
             SWATH_LAT_MIN = matcher.group(0)
         if "SWATH_LAT_MAX" in line:
-            matcher = re.search('[\d.]+', line)
+            matcher = re.search('[-\d.]+', line)
             SWATH_LAT_MAX = matcher.group(0)
         if "SWATH_LON_MIN" in line:
-            matcher = re.search('[\d.]+', line)
+            matcher = re.search('[-\d.]+', line)
             SWATH_LON_MIN = matcher.group(0)
         if "SWATH_LON_MAX" in line:
-            matcher = re.search('[\d.]+', line)
+            matcher = re.search('[-\d.]+', line)
             SWATH_LON_MAX = matcher.group(0)
 
     # 準備swath參數檔
@@ -85,10 +85,15 @@ def getAllSiteAodResult(convertedTif, siteShp):
         print(lon)
         print(lat)
 
-        l = looker.Looker(convertedTif)
-        aod = l.lookup(lon, lat)
-        print aod
-        aodList.append(aod)
+        try:
+            l = looker.Looker(convertedTif)
+            aod = l.lookup(lon, lat)
+            print aod
+            if aod == -9999:
+                aod = 0
+            aodList.append(aod)
+        except IndexError:
+            aodList.append(str(0))
 
     siteEngNameListStr = ','.join(siteEngNameList)
     aodListStr = ','.join(str(aod) for aod in aodList)
@@ -101,57 +106,68 @@ def getAllSiteAodResult(convertedTif, siteShp):
 
 # 參數設定區
 hdfFolderLocation = "C:\Users\hunter\Desktop\hdf"
-hdfFileLocation = "C:\Users\hunter\Desktop\GIS\MOD04_L2.A2011028.0155.051.2011033055902.hdf"
+siteShp = 'C:/Users/hunter/Desktop/GIS/site/site.shp'
+logFileName = "log.txt"
+
 subDataSet = "Optical_Depth_Land_And_Ocean"
+
 hdrFileName = "temp_hdr"
 parameterFileLocation = "temp_swath"
-
-srcTif = "C:\Users\hunter\Desktop\GIS\MOD04_L2.A2011028.0155.051.2011033055902_mod04.tif"
-convertedTif = './test2.tif'
-siteShp = 'C:/Users/hunter/Desktop/GIS/site/site.shp'
-
-logFileName = "log.txt"
-csvFileName = "result.csv"
+srcTif = '.\\temp_src_tif.tif'
+convertedTif = 'temp_converted_tif.tif'
 
 # 準備log
 logFile = open(logFileName, "a")
 logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Start processing all hdf files\n"
 logFile.write(logStr)
 
+# 準備csv
+csvFileName = "result" + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + ".csv"
+timeFieldStr = "year,month,day,Time"
+satellite = "terra"
+siteListStr = "Erlin,Sanchong,Sanyi,Tucheng,Shilin,Datong,Dali,Dayuan,Daliao,Xiaogang,Zhongshan,Zhongli,Renwu,Douliu,Dongshan,Guting,Zuoying,Pingzhen,Yonghe,Annan,Puzi,Xizhi,Zhushan,Zhudong,Xitun,Shalu,Yilan,Zhongming,Songshan,Banqiao,Linkou,Linyuan,Hualien,Kinmen,Qianjin,Qianzhen,Nantou,Pingtung,Hengchun,Meinong,Miaoli,Puli,Taoyuan,Magong,Matsu,Keelung,Lunbei,Tamsui,Mailiao,Shanhua,Fuxing,Hukou,Cailiao,Yangming,Hsinchu,Xindian,Xinzhuang,Xingang,Xinying,Nanzi,Wanli,Wanhua,Chiayi,Changhua,Taixi,Taitung,Tainan,Fengshan,Chaozhou,Xianxi,Qiaotou,Toufen,Longtan,Fengyuan,Guanshan,Guanyin"
+
 # 抓出資料夾內的所有hdf 檔案名稱
 hdfFiles = [f for f in listdir(hdfFolderLocation) if isfile(join(hdfFolderLocation, f))]
 for f in hdfFiles:
-    print(f)
+    # 從hdf檔案名稱抓出時間
+    year = int(f[10:14])
+    dayOfYear = int(f[14:17])
+    hour = int(f[18:20])
+    minute = int(f[20:22])
+    date = datetime.datetime(year, 1, 1, hour, minute) + datetime.timedelta(
+        dayOfYear - 1)
 
-# 生成hdr檔案
-generateHdr(hdfFileLocation, hdrFileName)
+    firstFiveValueStr = date.strftime('%Y,%m,%d,%H:%M,') + satellite + ","
+    print(firstFiveValueStr)
 
-# 生成參數檔
-generateParameterFile(hdrFileName, parameterFileLocation)
+    # 生成hdr檔案
+    hdfFileLocation = hdfFolderLocation + "\\" + f
+    generateHdr(hdfFileLocation, hdrFileName)
 
-# 執行 swtif 使用HEG將hdf轉換成tif
-os.system("swtif -p " + parameterFileLocation)
+    # 生成參數檔
+    generateParameterFile(hdrFileName, hdfFileLocation, parameterFileLocation)
 
-# 轉換tif成為EPSG:3826投影格式
-os.system(
-    "\"C:/Program Files (x86)/GDAL/gdalwarp.exe\" -overwrite -s_srs EPSG:53008 -t_srs EPSG:3826 -dstnodata -9999 -of GTiff " + srcTif + " " + convertedTif + "")
+    # 執行 swtif 使用HEG將hdf轉換成tif
+    os.system("swtif -p " + parameterFileLocation)
 
-# 取得各測站資料
-aodListStr = getAllSiteAodResult(convertedTif, siteShp)
+    # 轉換tif成為EPSG:3826投影格式
+    os.system(
+        "\"C:/Program Files (x86)/GDAL/gdalwarp.exe\" -overwrite -s_srs EPSG:53008 -t_srs EPSG:3826 -dstnodata -9999 -of GTiff " + srcTif + " " + convertedTif + "")
 
-csvFile = open(csvFileName, "a")
-csvFile.write(aodListStr)
+    # 取得各測站資料
+    aodListStr = getAllSiteAodResult(convertedTif, siteShp)
 
-# 將測站資料寫入csv
-oldFilename = 'MOD04_L2.A2011028.0155.051.2011033055902.hdf'
-year = int(oldFilename[10:14])
-dayOfYear = int(oldFilename[14:17])
-hour = int(oldFilename[18:20])
-minute = int(oldFilename[20:22])
-date = datetime.datetime(year, 1, 1, hour, minute) + datetime.timedelta(
-    dayOfYear - 1)  # This assumes that the year is 2007
-newFilename = date.strftime('%Y-%m-%d %H:%M')
-print(newFilename)
+    # 將測站資料寫入csv
+    csvFile = open(csvFileName, "a")
+    resultStr = firstFiveValueStr + aodListStr + "\n"
+    csvFile.write(resultStr)
+
+    # 刪除暫存檔
+    os.remove(hdrFileName)
+    os.remove(parameterFileLocation)
+    os.remove(srcTif)
+    os.remove(convertedTif)
 
 # 關閉csv及log檔案
 csvFile.close()
