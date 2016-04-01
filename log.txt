@@ -1,24 +1,96 @@
-2016-03-31 19:49:58  Start processing all hdf files2016-03-31 22:08:33  Start processing all hdf files2016-03-31 22:09:02  Start processing all hdf files2016-03-31 22:09:35  Start processing all hdf files
-2016-03-31 22:09:45  Start processing all hdf files
-2016-04-01 00:32:03  Start processing all hdf files
-2016-04-01 00:56:20  Start processing all hdf files
-2016-04-01 00:58:58  Start processing all hdf files
-2016-04-01 01:00:19  Start processing all hdf files
-2016-04-01 01:06:51  Start processing all hdf files
-2016-04-01 01:10:08  Start processing all hdf files
-2016-04-01 01:10:17  Start processing all hdf files
-2016-04-01 01:16:23  Start processing all hdf files
-2016-04-01 01:17:08  Start processing all hdf files
-2016-04-01 01:21:13  Start processing all hdf files
-2016-04-01 01:24:07  Start processing all hdf files
-2016-04-01 01:26:06  Start processing all hdf files
-2016-04-01 01:27:52  Start processing all hdf files
-2016-04-01 01:31:44  Start processing all hdf files
-2016-04-01 01:35:42  Start processing all hdf files
-2016-04-01 01:37:15  Start processing all hdf files
-2016-04-01 01:40:15  Start processing all hdf files
-2016-04-01 01:40:50  Start processing all hdf files
-2016-04-01 01:41:14  Start processing all hdf files
-2016-04-01 01:42:43  Start processing all hdf files
-2016-04-01 01:44:31  Start processing all hdf files
-2016-04-01 01:47:04  Start processing all hdf files
+2016-04-01 11:33:44  Start processing all hdf files
+2016-04-01 12:14:21  Start processing all hdf files
+2016-04-01 12:45:35  Start processing all hdf files
+2016-04-01 13:22:35  Start processing all hdf files.
+2016-04-01 13:22:35  Prepare csv file.
+2016-04-01 13:22:35  Generate hdr file forMOD04_L2.A2015001.0230.051.2015005134553.hdf.
+2016-04-01 13:22:35  Generate parameter file for MOD04_L2.A2015001.0230.051.2015005134553.hdf.
+2016-04-01 13:22:35  Convert from hdf to tif file for MOD04_L2.A2015001.0230.051.2015005134553.hdf.
+2016-04-01 13:22:36  Convert tif file to EPSG:3826 for MOD04_L2.A2015001.0230.051.2015005134553.hdf.
+2016-04-01 13:22:36  Get all aod values from all sites for MOD04_L2.A2015001.0230.051.2015005134553.hdf.
+2016-04-01 13:22:36  Write all aod values into csv file for MOD04_L2.A2015001.0230.051.2015005134553.hdf.
+2016-04-01 13:22:36  Generate hdr file forMOD04_L2.A2015002.0130.051.2015005135101.hdf.
+2016-04-01 13:22:37  Generate parameter file for MOD04_L2.A2015002.0130.051.2015005135101.hdf.
+2016-04-01 13:22:37  Convert from hdf to tif file for MOD04_L2.A2015002.0130.051.2015005135101.hdf.
+2016-04-01 13:22:38  Convert tif file to EPSG:3826 for MOD04_L2.A2015002.0130.051.2015005135101.hdf.
+2016-04-01 13:22:38  Get all aod values from all sites for MOD04_L2.A2015002.0130.051.2015005135101.hdf.
+2016-04-01 13:22:38  Write all aod values into csv file for MOD04_L2.A2015002.0130.051.2015005135101.hdf.
+2016-04-01 13:22:38  Generate hdr file forMOD04_L2.A2015002.0135.051.2015005135159.hdf.
+2016-04-01 13:22:38  Generate parameter file for MOD04_L2.A2015002.0135.051.2015005135159.hdf.
+2016-04-01 13:22:38  Convert from hdf to tif file for MOD04_L2.A2015002.0135.051.2015005135159.hdf.
+2016-04-01 13:22:40  Convert tif file to EPSG:3826 for MOD04_L2.A2015002.0135.051.2015005135159.hdf.
+2016-04-01 13:22:40  Get all aod values from all sites for MOD04_L2.A2015002.0135.051.2015005135159.hdf.
+2016-04-01 13:22:40  Write all aod values into csv file for MOD04_L2.A2015002.0135.051.2015005135159.hdf.
+2016-04-01 13:22:40  Generate hdr file forMOD04_L2.A2015002.0310.051.2015005135121.hdf.
+2016-04-01 13:22:40  Generate parameter file for MOD04_L2.A2015002.0310.051.2015005135121.hdf.
+2016-04-01 13:22:40  Convert from hdf to tif file for MOD04_L2.A2015002.0310.051.2015005135121.hdf.
+2016-04-01 13:22:41  Convert tif file to EPSG:3826 for MOD04_L2.A2015002.0310.051.2015005135121.hdf.
+2016-04-01 13:22:42  Get all aod values from all sites for MOD04_L2.A2015002.0310.051.2015005135121.hdf.
+2016-04-01 13:22:42  Write all aod values into csv file for MOD04_L2.A2015002.0310.051.2015005135121.hdf.
+2016-04-01 13:22:42  Generate hdr file forMOD04_L2.A2015002.0315.051.2015005135112.hdf.
+2016-04-01 13:22:42  Generate parameter file for MOD04_L2.A2015002.0315.051.2015005135112.hdf.
+2016-04-01 13:22:42  Convert from hdf to tif file for MOD04_L2.A2015002.0315.051.2015005135112.hdf.
+2016-04-01 13:22:43  Convert tif file to EPSG:3826 for MOD04_L2.A2015002.0315.051.2015005135112.hdf.
+2016-04-01 13:22:43  Get all aod values from all sites for MOD04_L2.A2015002.0315.051.2015005135112.hdf.
+2016-04-01 13:22:43  Write all aod values into csv file for MOD04_L2.A2015002.0315.051.2015005135112.hdf.
+2016-04-01 13:22:43  Generate hdr file forMOD04_L2.A2015003.0215.051.2015005184052.hdf.
+2016-04-01 13:22:43  Generate parameter file for MOD04_L2.A2015003.0215.051.2015005184052.hdf.
+2016-04-01 13:22:43  Convert from hdf to tif file for MOD04_L2.A2015003.0215.051.2015005184052.hdf.
+2016-04-01 13:22:45  Convert tif file to EPSG:3826 for MOD04_L2.A2015003.0215.051.2015005184052.hdf.
+2016-04-01 13:22:45  Get all aod values from all sites for MOD04_L2.A2015003.0215.051.2015005184052.hdf.
+2016-04-01 13:22:45  Write all aod values into csv file for MOD04_L2.A2015003.0215.051.2015005184052.hdf.
+2016-04-01 13:22:45  Generate hdr file forMOD04_L2.A2015003.0220.051.2015005185507.hdf.
+2016-04-01 13:22:45  Generate parameter file for MOD04_L2.A2015003.0220.051.2015005185507.hdf.
+2016-04-01 13:22:45  Convert from hdf to tif file for MOD04_L2.A2015003.0220.051.2015005185507.hdf.
+2016-04-01 13:22:46  Convert tif file to EPSG:3826 for MOD04_L2.A2015003.0220.051.2015005185507.hdf.
+2016-04-01 13:22:46  Get all aod values from all sites for MOD04_L2.A2015003.0220.051.2015005185507.hdf.
+2016-04-01 13:22:47  Write all aod values into csv file for MOD04_L2.A2015003.0220.051.2015005185507.hdf.
+2016-04-01 13:22:47  Generate hdr file forMOD04_L2.A2015004.0120.051.2015006012714.hdf.
+2016-04-01 13:22:47  Generate parameter file for MOD04_L2.A2015004.0120.051.2015006012714.hdf.
+2016-04-01 13:22:47  Convert from hdf to tif file for MOD04_L2.A2015004.0120.051.2015006012714.hdf.
+2016-04-01 13:22:48  Convert tif file to EPSG:3826 for MOD04_L2.A2015004.0120.051.2015006012714.hdf.
+2016-04-01 13:22:48  Get all aod values from all sites for MOD04_L2.A2015004.0120.051.2015006012714.hdf.
+2016-04-01 13:22:48  Write all aod values into csv file for MOD04_L2.A2015004.0120.051.2015006012714.hdf.
+2016-04-01 13:22:48  Generate hdr file forMOD04_L2.A2015004.0125.051.2015006012619.hdf.
+2016-04-01 13:22:48  Generate parameter file for MOD04_L2.A2015004.0125.051.2015006012619.hdf.
+2016-04-01 13:22:48  Convert from hdf to tif file for MOD04_L2.A2015004.0125.051.2015006012619.hdf.
+2016-04-01 13:22:50  Convert tif file to EPSG:3826 for MOD04_L2.A2015004.0125.051.2015006012619.hdf.
+2016-04-01 13:22:50  Get all aod values from all sites for MOD04_L2.A2015004.0125.051.2015006012619.hdf.
+2016-04-01 13:22:50  Write all aod values into csv file for MOD04_L2.A2015004.0125.051.2015006012619.hdf.
+2016-04-01 13:22:50  Generate hdr file forMOD04_L2.A2015004.0300.051.2015006012658.hdf.
+2016-04-01 13:22:50  Generate parameter file for MOD04_L2.A2015004.0300.051.2015006012658.hdf.
+2016-04-01 13:22:50  Convert from hdf to tif file for MOD04_L2.A2015004.0300.051.2015006012658.hdf.
+2016-04-01 13:22:51  Convert tif file to EPSG:3826 for MOD04_L2.A2015004.0300.051.2015006012658.hdf.
+2016-04-01 13:22:51  Get all aod values from all sites for MOD04_L2.A2015004.0300.051.2015006012658.hdf.
+2016-04-01 13:22:52  Write all aod values into csv file for MOD04_L2.A2015004.0300.051.2015006012658.hdf.
+2016-04-01 13:22:52  Generate hdr file forMOD04_L2.A2015005.0205.051.2015006020407.hdf.
+2016-04-01 13:22:52  Generate parameter file for MOD04_L2.A2015005.0205.051.2015006020407.hdf.
+2016-04-01 13:22:52  Convert from hdf to tif file for MOD04_L2.A2015005.0205.051.2015006020407.hdf.
+2016-04-01 13:22:53  Convert tif file to EPSG:3826 for MOD04_L2.A2015005.0205.051.2015006020407.hdf.
+2016-04-01 13:22:53  Get all aod values from all sites for MOD04_L2.A2015005.0205.051.2015006020407.hdf.
+2016-04-01 13:22:53  Write all aod values into csv file for MOD04_L2.A2015005.0205.051.2015006020407.hdf.
+2016-04-01 13:22:53  Generate hdr file forMOD04_L2.A2015006.0110.051.2015006095721.hdf.
+2016-04-01 13:22:53  Generate parameter file for MOD04_L2.A2015006.0110.051.2015006095721.hdf.
+2016-04-01 13:22:53  Convert from hdf to tif file for MOD04_L2.A2015006.0110.051.2015006095721.hdf.
+2016-04-01 13:22:55  Convert tif file to EPSG:3826 for MOD04_L2.A2015006.0110.051.2015006095721.hdf.
+2016-04-01 13:22:55  Get all aod values from all sites for MOD04_L2.A2015006.0110.051.2015006095721.hdf.
+2016-04-01 13:22:55  Write all aod values into csv file for MOD04_L2.A2015006.0110.051.2015006095721.hdf.
+2016-04-01 13:22:55  Generate hdr file forMOD04_L2.A2015006.0245.051.2015006095717.hdf.
+2016-04-01 13:22:55  Generate parameter file for MOD04_L2.A2015006.0245.051.2015006095717.hdf.
+2016-04-01 13:22:55  Convert from hdf to tif file for MOD04_L2.A2015006.0245.051.2015006095717.hdf.
+2016-04-01 13:22:56  Convert tif file to EPSG:3826 for MOD04_L2.A2015006.0245.051.2015006095717.hdf.
+2016-04-01 13:22:56  Get all aod values from all sites for MOD04_L2.A2015006.0245.051.2015006095717.hdf.
+2016-04-01 13:22:57  Write all aod values into csv file for MOD04_L2.A2015006.0245.051.2015006095717.hdf.
+2016-04-01 13:22:57  Generate hdr file forMOD04_L2.A2015006.0250.051.2015006095652.hdf.
+2016-04-01 13:22:57  Generate parameter file for MOD04_L2.A2015006.0250.051.2015006095652.hdf.
+2016-04-01 13:22:57  Convert from hdf to tif file for MOD04_L2.A2015006.0250.051.2015006095652.hdf.
+2016-04-01 13:22:58  Convert tif file to EPSG:3826 for MOD04_L2.A2015006.0250.051.2015006095652.hdf.
+2016-04-01 13:22:58  Get all aod values from all sites for MOD04_L2.A2015006.0250.051.2015006095652.hdf.
+2016-04-01 13:22:58  Write all aod values into csv file for MOD04_L2.A2015006.0250.051.2015006095652.hdf.
+2016-04-01 13:22:58  Generate hdr file forMOD04_L2.A2015007.0150.051.2015007095942.hdf.
+2016-04-01 13:22:58  Generate parameter file for MOD04_L2.A2015007.0150.051.2015007095942.hdf.
+2016-04-01 13:22:58  Convert from hdf to tif file for MOD04_L2.A2015007.0150.051.2015007095942.hdf.
+2016-04-01 13:23:00  Convert tif file to EPSG:3826 for MOD04_L2.A2015007.0150.051.2015007095942.hdf.
+2016-04-01 13:23:00  Get all aod values from all sites for MOD04_L2.A2015007.0150.051.2015007095942.hdf.
+2016-04-01 13:23:00  Write all aod values into csv file for MOD04_L2.A2015007.0150.051.2015007095942.hdf.
+2016-04-01 13:23:00  Complete all processes.

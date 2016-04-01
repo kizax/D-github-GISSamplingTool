@@ -25,7 +25,7 @@ GROUP                  = INVENTORYMETADATA
 
     OBJECT                 = PRODUCTIONDATETIME
       NUM_VAL              = 1
-      VALUE                = "2016-03-31T17:48:23.000Z"
+      VALUE                = "2016-04-01T05:23:00.000Z"
     END_OBJECT             = PRODUCTIONDATETIME
 
   END_GROUP              = ECSDATAGRANULE
@@ -57,22 +57,22 @@ GROUP                  = INVENTORYMETADATA
 
     OBJECT                 = RANGEBEGINNINGTIME
       NUM_VAL              = 1
-      VALUE                = "09:35:00.000000"
+      VALUE                = "01:50:00.000000"
     END_OBJECT             = RANGEBEGINNINGTIME
 
     OBJECT                 = RANGEBEGINNINGDATE
       NUM_VAL              = 1
-      VALUE                = "2016-02-01"
+      VALUE                = "2015-01-07"
     END_OBJECT             = RANGEBEGINNINGDATE
 
     OBJECT                 = RANGEENDINGTIME
       NUM_VAL              = 1
-      VALUE                = "09:40:00.000000"
+      VALUE                = "01:55:00.000000"
     END_OBJECT             = RANGEENDINGTIME
 
     OBJECT                 = RANGEENDINGDATE
       NUM_VAL              = 1
-      VALUE                = "2016-02-01"
+      VALUE                = "2015-01-07"
     END_OBJECT             = RANGEENDINGDATE
 
   END_GROUP              = RANGEDATETIME
@@ -86,25 +86,25 @@ GROUP                  = INVENTORYMETADATA
         OBJECT                 = WESTBOUNDINGCOORDINATE
           NUM_VAL              = 1
           VALIDRULE            = "Range(-180.0,+180.0)"
-          VALUE                = 2.2414457560818
+          VALUE                = 95.894875031061
         END_OBJECT             = WESTBOUNDINGCOORDINATE
 
         OBJECT                 = NORTHBOUNDINGCOORDINATE
           NUM_VAL              = 1
           VALIDRULE            = "Range(-90.0,+90.0)"
-          VALUE                = 17.9974632263184
+          VALUE                = 44.7065658569336
         END_OBJECT             = NORTHBOUNDINGCOORDINATE
 
         OBJECT                 = EASTBOUNDINGCOORDINATE
           NUM_VAL              = 1
           VALIDRULE            = "Range(-180.0,+180.0)"
-          VALUE                = 26.9600088620817
+          VALUE                = 143.560402048065
         END_OBJECT             = EASTBOUNDINGCOORDINATE
 
         OBJECT                 = SOUTHBOUNDINGCOORDINATE
           NUM_VAL              = 1
           VALIDRULE            = "Range(-90.0,+90.0)"
-          VALUE                = -2.69161992431507
+          VALUE                = 23.6545163352364
         END_OBJECT             = SOUTHBOUNDINGCOORDINATE
 
       END_GROUP              = BOUNDINGRECTANGLE
@@ -117,7 +117,7 @@ GROUP                  = INVENTORYMETADATA
 
     OBJECT                 = INPUTPOINTER
       NUM_VAL              = 1
-      VALUE                = "C:\Users\hunter\Desktop\hdf\MOD04_L2.A2016032.0935.051.2016034194518.hdf"
+      VALUE                = "C:\Users\hunter\Desktop\hdf\MOD04_L2.A2015007.0150.051.2015007095942.hdf"
     END_OBJECT             = INPUTPOINTER
 
   END_GROUP              = INPUTGRANULE
@@ -412,22 +412,22 @@ GROUP                  = INVENTORYMETADATA
 
       OBJECT                 = DATACOLUMNS
         NUM_VAL              = 1
-        VALUE                = 261
+        VALUE                = 485
       END_OBJECT             = DATACOLUMNS
 
       OBJECT                 = DATAROWS
         NUM_VAL              = 1
-        VALUE                = 228
+        VALUE                = 232
       END_OBJECT             = DATAROWS
 
       OBJECT                 = UPPERLEFTCORNER
         NUM_VAL              = 2
-        VALUE                = (2.4896230904800e+05, 2.00122566089400e+06)
+        VALUE                = (9.76712654154600e+06, 4.97114097016200e+06)
       END_OBJECT             = UPPERLEFTCORNER
 
       OBJECT                 = LOWERRIGHTCORNER
         NUM_VAL              = 2
-        VALUE                = (2.85113230904800e+06, -2.99294339106000e+05)
+        VALUE                = (1.462197654154600e+07, 2.63026097016200e+06)
       END_OBJECT             = LOWERRIGHTCORNER
 
       OBJECT                 = CORNERCOORDINATEUNITS
@@ -439,7 +439,7 @@ GROUP                  = INVENTORYMETADATA
 
         OBJECT                 = XPIXELSIZE
           NUM_VAL              = 1
-          VALUE                = 9.970000e+03
+          VALUE                = 1.001000e+04
         END_OBJECT             = XPIXELSIZE
 
         OBJECT                 = YPIXELSIZE

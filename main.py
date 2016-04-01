@@ -42,8 +42,6 @@ def generateParameterFile(hdrFileName, hdfFileLocation, parameterFileLocation):
             SWATH_LON_MAX = matcher.group(0)
 
     # 準備swath參數檔
-
-
     outputPixelSizeXStr = "OUTPUT_PIXEL_SIZE_X = " + str(SWATH_X_PIXEL_RES_METERS) + "\n"
     outputPixelSizeYStr = "OUTPUT_PIXEL_SIZE_Y = " + str(SWATH_Y_PIXEL_RES_METERS) + "\n"
     spatialSubsetUlCornerStr = "SPATIAL_SUBSET_UL_CORNER = ( " + SWATH_LAT_MAX + " " + SWATH_LON_MIN + " )" + "\n"
@@ -92,12 +90,16 @@ def getAllSiteAodResult(convertedTif, siteShp):
         try:
             l = looker.Looker(convertedTif)
             aod = l.lookup(lon, lat)
+            if aod != -9999:
+                aod = aod * 0.001
             print aod
+
             if aod == -9999:
-                aod = 0
-            aodList.append(aod)
+                aodList.append(".")
+            else:
+                aodList.append(str(aod))
         except IndexError:
-            aodList.append(str(0))
+            aodList.append(str(-99999))
 
     siteEngNameListStr = ','.join(siteEngNameList)
     aodListStr = ','.join(str(aod) for aod in aodList)
@@ -122,12 +124,14 @@ convertedTif = 'temp_converted_tif.tif'
 
 # 準備log
 logFile = open(logFileName, "a")
-logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Start processing all hdf files\n"
+logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Start processing all hdf files.\n"
 logFile.write(logStr)
 
 # 準備csv
+logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Prepare csv file.\n"
+logFile.write(logStr)
 csvFileName = "result" + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + ".csv"
-timeFieldStr = "year,month,day,time,"
+timeFieldStr = "year,month,day,time,dayOfYear,"
 satellite = "terra"
 siteListStr = "Erlin,Sanchong,Sanyi,Tucheng,Shilin,Datong,Dali,Dayuan,Daliao,Xiaogang,Zhongshan,Zhongli,Renwu,Douliu,Dongshan,Guting,Zuoying,Pingzhen,Yonghe,Annan,Puzi,Xizhi,Zhushan,Zhudong,Xitun,Shalu,Yilan,Zhongming,Songshan,Banqiao,Linkou,Linyuan,Hualien,Kinmen,Qianjin,Qianzhen,Nantou,Pingtung,Hengchun,Meinong,Miaoli,Puli,Taoyuan,Magong,Matsu,Keelung,Lunbei,Tamsui,Mailiao,Shanhua,Fuxing,Hukou,Cailiao,Yangming,Hsinchu,Xindian,Xinzhuang,Xingang,Xinying,Nanzi,Wanli,Wanhua,Chiayi,Changhua,Taixi,Taitung,Tainan,Fengshan,Chaozhou,Xianxi,Qiaotou,Toufen,Longtan,Fengyuan,Guanshan,Guanyin"
 csvFile = open(csvFileName, "a")
@@ -136,6 +140,7 @@ csvFile.write(fieldsStr)
 csvFile.close()
 
 # 抓出資料夾內的所有hdf 檔案名稱
+
 hdfFiles = [f for f in listdir(hdfFolderLocation) if isfile(join(hdfFolderLocation, f))]
 for f in hdfFiles:
     # 從hdf檔案名稱抓出時間
@@ -146,27 +151,47 @@ for f in hdfFiles:
     date = datetime.datetime(year, 1, 1, hour, minute) + datetime.timedelta(
         dayOfYear - 1)
 
-    firstFiveValueStr = date.strftime('%Y,%m,%d,%H:%M,') + satellite + ","
+    firstFiveValueStr = date.strftime('%Y,%m,%d,%H:%M,') + str(dayOfYear) + "," + satellite + ","
     print(firstFiveValueStr)
 
     # 生成hdr檔案
+    logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Generate hdr file for" + f + ".\n"
+    logFile.write(logStr)
+
     hdfFileLocation = hdfFolderLocation + "\\" + f
     generateHdr(hdfFileLocation, hdrFileName)
 
     # 生成參數檔
+    logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Generate parameter file for " + f + ".\n"
+    logFile.write(logStr)
+
     generateParameterFile(hdrFileName, hdfFileLocation, parameterFileLocation)
 
     # 執行 swtif 使用HEG將hdf轉換成tif
+    logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Convert from hdf to tif file for " + f + ".\n"
+    logFile.write(logStr)
+
     os.system("swtif -p " + parameterFileLocation)
 
     # 轉換tif成為EPSG:3826投影格式
+    logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Convert tif file to EPSG:3826 for " + f + ".\n"
+    logFile.write(logStr)
+
     os.system(
         "gdalwarp -overwrite -s_srs EPSG:53008 -t_srs EPSG:3826 -dstnodata -9999 -of GTiff " + srcTif + " " + convertedTif + "")
 
     # 取得各測站資料
+    logStr = datetime.datetime.now().strftime(
+        '%Y-%m-%d %H:%M:%S  ') + "Get all aod values from all sites for " + f + ".\n"
+    logFile.write(logStr)
+
     aodListStr = getAllSiteAodResult(convertedTif, siteShp)
 
     # 將測站資料寫入csv
+    logStr = datetime.datetime.now().strftime(
+        '%Y-%m-%d %H:%M:%S  ') + "Write all aod values into csv file for " + f + ".\n"
+    logFile.write(logStr)
+
     csvFile = open(csvFileName, "a")
     resultStr = firstFiveValueStr + aodListStr + "\n"
     csvFile.write(resultStr)
@@ -181,5 +206,8 @@ for f in hdfFiles:
         None
 
 # 關閉csv及log檔案
+logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Complete all processes.\n"
+logFile.write(logStr)
+
 csvFile.close()
 logFile.close()
