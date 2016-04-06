@@ -111,13 +111,13 @@ def getAllSiteAodResult(convertedTif, siteShp):
 
 
 # 參數設定區
-hdfFolderLocation = "C:\Users\hunter\Desktop\hdf"
-siteShp = 'C:\Users\hunter\Desktop\GIS\site\site.shp'
+hdfFolderLocation = "C:\Users\hunter\Desktop\hdf"  # HDF所在的資料夾
+siteShp = 'C:\Users\hunter\Desktop\GIS\site\site.shp'  # 測站SHP圖層所在的位置 需連同.dbf .prj .sbn. sbx .shp .shx一同放入
+subDataSet = "Optical_Depth_Land_And_Ocean"  # 如果抓取HDF檔內其他的圖層，更改此圖層名稱。
+
 logFileName = "log.txt"
 resultFolder = ".\\result"
 tempFolder = ".\\temp"
-
-subDataSet = "Optical_Depth_Land_And_Ocean"
 
 hdrFileName = tempFolder + "\\" + "temp_hdr"
 parameterFileLocation = tempFolder + "\\" + "temp_swath"
