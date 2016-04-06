@@ -40,3 +40,8 @@ tmtagsHistory
 *.sublime-workspace
 
 .bundle
+
+/result
+/temp
+hegtool.log
+swtif.log

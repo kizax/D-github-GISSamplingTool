@@ -114,25 +114,34 @@ def getAllSiteAodResult(convertedTif, siteShp):
 hdfFolderLocation = "C:\Users\hunter\Desktop\hdf"
 siteShp = 'C:\Users\hunter\Desktop\GIS\site\site.shp'
 logFileName = "log.txt"
+resultFolder = ".\\result"
+tempFolder = ".\\temp"
 
 subDataSet = "Optical_Depth_Land_And_Ocean"
 
-hdrFileName = "temp_hdr"
-parameterFileLocation = "temp_swath"
-srcTif = '.\\temp_src_tif.tif'
-convertedTif = 'temp_converted_tif.tif'
+hdrFileName = tempFolder + "\\" + "temp_hdr"
+parameterFileLocation = tempFolder + "\\" + "temp_swath"
+srcTif = tempFolder + "\\" + "temp_src_tif.tif"
+convertedTif = tempFolder + "\\" + "temp_converted_tif.tif"
+
+# 準備temp跟result folder
+if not os.path.exists(resultFolder):
+    os.makedirs(resultFolder)
+if not os.path.exists(tempFolder):
+    os.makedirs(tempFolder)
 
 # 準備log
-logFile = open(logFileName, "a")
+
+logFile = open(resultFolder + "\\" + logFileName, "a")
 logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Start processing all hdf files.\n"
 logFile.write(logStr)
 
 # 準備csv
 logStr = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S  ') + "Prepare csv file.\n"
 logFile.write(logStr)
-csvFileName = "result" + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + ".csv"
+csvFileName = resultFolder + "\\" + "result" + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + ".csv"
 timeFieldStr = "year,month,day,time,dayOfYear,"
-satellite = "terra"
+
 siteListStr = "Erlin,Sanchong,Sanyi,Tucheng,Shilin,Datong,Dali,Dayuan,Daliao,Xiaogang,Zhongshan,Zhongli,Renwu,Douliu,Dongshan,Guting,Zuoying,Pingzhen,Yonghe,Annan,Puzi,Xizhi,Zhushan,Zhudong,Xitun,Shalu,Yilan,Zhongming,Songshan,Banqiao,Linkou,Linyuan,Hualien,Kinmen,Qianjin,Qianzhen,Nantou,Pingtung,Hengchun,Meinong,Miaoli,Puli,Taoyuan,Magong,Matsu,Keelung,Lunbei,Tamsui,Mailiao,Shanhua,Fuxing,Hukou,Cailiao,Yangming,Hsinchu,Xindian,Xinzhuang,Xingang,Xinying,Nanzi,Wanli,Wanhua,Chiayi,Changhua,Taixi,Taitung,Tainan,Fengshan,Chaozhou,Xianxi,Qiaotou,Toufen,Longtan,Fengyuan,Guanshan,Guanyin"
 csvFile = open(csvFileName, "a")
 fieldsStr = timeFieldStr + "satellite," + siteListStr + "\n"
@@ -150,6 +159,11 @@ for f in hdfFiles:
     minute = int(f[20:22])
     date = datetime.datetime(year, 1, 1, hour, minute) + datetime.timedelta(
         dayOfYear - 1)
+    type = f[0:3]
+    if type == "MOD":
+        satellite = "terra"
+    if type == "MYD":
+        satellite = "aqua"
 
     firstFiveValueStr = date.strftime('%Y,%m,%d,%H:%M,') + str(dayOfYear) + "," + satellite + ","
     print(firstFiveValueStr)
