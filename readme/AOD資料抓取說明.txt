@@ -1,0 +1,14 @@
+1. 打開Pycharm(JetBrains-JetBrains PyCharm Community Edition 2016.1.1)
+
+打開專案GISSamplingTool-C:\Users\ORS717\Desktop\Mike\AOD程式\GISSamplingTool
+真正的需要更改的地方是從 "# 參數設定區" 開始
+
+2. #第一次執行程式需要更改參數 
+hdfFolderLocation = "C:\Users\ORS717\Desktop\Mike\HDF" # HDF所在的資料夾
+siteShp = 'C:\Users\hunter\Desktop\GIS\site\site.shp' # 測站SHP圖層所在的位置 需連同.dbf .prj .sbn. sbx .shp .shx一同放入
+subDataSet = "Optical_Depth_Land_And_Ocean" # 如果抓取HDF檔內其他的圖層，更改此圖層名稱。
+
+3.Run > Run "HdfToTiff" > scripte改成main.py所在的位置(ex. C:\Users\ORS717\Desktop\Mike\AOD程式\GISSamplingTool\main.py), python interpreter選擇2.7.11 > Run
+
+4.若程式未成功執行到最後即跳出 則需清空temp資料夾裡面的暫存檔，才能產生新的暫存檔
+

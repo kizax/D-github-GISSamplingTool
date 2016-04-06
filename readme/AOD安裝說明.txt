@@ -1,0 +1,68 @@
+1.安裝python 2.7.* (不要裝到3版本,寫法跟python2不相容)
+
+若有需要設定環境變數則
+電腦>(右鍵)內容>進階系統設定>進階>環境變數>系統變數>Append ;C:\python27 to the Path variable
+
+2.安裝pycharm Community (Python's IDE, Profession須付費 )
+3.設定Project Interpreter
+File > Settings > Project> Project Interpreter 選擇2.7.*
+
+安裝pycharm相關package
+到右邊按下綠色+號，在上方輸入要安裝的pycharm相關package
+numpy
+按下Install完成安裝
+
+4.安裝GDAL
+
+(在package的GDAL non-work, 需要C++ 9.0 ,所以必須手動安裝, 但還是會失敗)
+
+測試python在哪個平台執行 (在32位元版本or 64位元版本?)
+打開cmd 並且輸入python按下enter
+再輸入指令: import platform (Enter)
+再輸入: platform.architecture()   (Enter)
+應該會顯示出版本 (Python預設安裝是32位元版本)
+
+http://www.gisinternals.com/release.php
+Select: release-1500-gdal-1-11-3-mapserver-6-4-2  Compiler MSVC 2008 Arch. win32
+and download and setup as follows:
+a. gdal-111-1500-core.msi
+b. GDAL-1.11.3.win32-py2.7.msi
+
+5.設定GDAL系統變數 電腦>(右鍵)內容>進階系統設定>進階>環境變數>系統變數>
+A, Path: Append(附加在最後面, 新增1個value) ;C:\Program Files (x86)\GDAL;
+B, 新增一個新的系統變數: Create a new user or system variable with the data folder from your installation.
+Name : GDAL_DATA
+Value: C:\Program Files (x86)\GDAL\gdal-data
+
+(PS. 如果只有一個value, 不須加上';' )
+
+6.安裝heg
+到http://newsroom.gsfc.nasa.gov/sdptoolkit/HEG/HEGDownload.html 下載 hegWINv2.13.zip
+安裝過程請參考HEG安裝步驟
+
+7.設定其他系統變數
+
+新增path
+Path: Append(附加在最後面, 新增1個value) ;C:\HEG\HEG_Win\bin;
+
+
+電腦>(右鍵)內容>進階系統設定>進階>環境變數>系統變數>
+(這些資料都可以把HEGtool.bat以Notepad++打開，並且可以在裡面找到以下資料，並新增6個系統變數)
+C:\HEG\HEG_Win\bin\HEGtool.bat
+
+set CYGWIN=nodosfilewarning
+
+set LD_LIBRARY_PATH=C:\HEG\HEG_Win\bin
+
+set MRTDATADIR=C:\HEG\HEG_Win\data
+
+set MRTBINDIR=C:\HEG\HEG_Win\bin
+
+set PGSHOME=C:\HEG\HEG_Win\TOOLKIT_MTD
+
+set HEGUSER=ORS717
+
+環境變數都設定完成之後，重新啟動電腦.
+
+
+PS. 新增系統變數和加新的value到path裡面，意義不同。
